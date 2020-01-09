@@ -103,7 +103,12 @@ const tempData = [
     price: '400€',
     address: 'my house',
     host: 'bryan stark',
-    date: 'from march',
+    connection: 1,
+    second: '',
+    shared_room: false,
+    roommates: 3,
+    date_from: 'from march',
+    date_until: '',
     img_id: 'IMG_6514.jpg'
   },
   {
@@ -111,7 +116,12 @@ const tempData = [
     price: '500€',
     address: 'my house',
     host: 'bryan stark',
-    date: 'from march',
+    connection: 1,
+    second: '',
+    shared_room: false,
+    roommates: 3,
+    date_from: 'from march',
+    date_until: 'until july',
     img_id: 'IMG_6514.jpg'
   },
   {
@@ -119,7 +129,12 @@ const tempData = [
     price: '600€',
     address: 'my house',
     host: 'bryan stark',
-    date: 'from march',
+    connection: 1,
+    second: '',
+    shared_room: false,
+    roommates: 3,
+    date_from: 'from march',
+    date_until: '',
     img_id: 'IMG_6514.jpg'
   },
   {
@@ -127,7 +142,12 @@ const tempData = [
     price: '700€',
     address: 'my house',
     host: 'bryan stark',
-    date: 'from march',
+    connection: 1,
+    second: '',
+    shared_room: false,
+    roommates: 3,
+    date_from: 'from march',
+    date_until: '',
     img_id: 'IMG_6514.jpg'
   },
   {
@@ -135,7 +155,12 @@ const tempData = [
     price: '800€',
     address: 'my house',
     host: 'bryan stark',
-    date: 'from march',
+    connection: 1,
+    second: '',
+    shared_room: false,
+    roommates: 3,
+    date_from: 'from march',
+    date_until: '',
     img_id: 'IMG_6514.jpg'
   },
   {
@@ -143,7 +168,12 @@ const tempData = [
     price: '900€',
     address: 'my house',
     host: 'bryan stark',
-    date: 'from march',
+    connection: 1,
+    second: '',
+    shared_room: false,
+    roommates: 3,
+    date_from: 'from march',
+    date_until: '',
     img_id: 'IMG_6514.jpg'
   },
   {
@@ -151,7 +181,12 @@ const tempData = [
     price: '1000€',
     address: 'my house',
     host: 'bryan stark',
-    date: 'from march',
+    connection: 1,
+    second: '',
+    shared_room: false,
+    roommates: 3,
+    date_from: 'from march',
+    date_until: '',
     img_id: 'IMG_6514.jpg'
   },
   {
@@ -159,7 +194,12 @@ const tempData = [
     price: '1100€',
     address: 'my house',
     host: 'bryan stark',
-    date: 'from march',
+    connection: 1,
+    second: '',
+    shared_room: false,
+    roommates: 3,
+    date_from: 'from march',
+    date_until: '',
     img_id: 'IMG_6514.jpg'
   }
 ];
