@@ -2,6 +2,12 @@
 #
 .DS_Store
 
+
+# personal
+assets/
+
+
+
 # Xcode
 #
 build/

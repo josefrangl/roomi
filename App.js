@@ -10,6 +10,7 @@ import React from 'react';
 import {
   SafeAreaView,
   StyleSheet,
+  FlatList,
   ScrollView,
   View,
   Text,
@@ -25,11 +26,23 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import Listing from './components/listing';
+
 const App: () => React$Node = () => {
   return (
-    <>
-    <View style={{flex: 1, justifyContent: 'center'}}>
-      <View style={{}}>
+    <SafeAreaView style={{flex: 1}}>
+      <FlatList
+        data={tempData}
+        renderItem={({item}) => (
+          <Listing 
+            item={item}
+          />)}
+        keyExtractor={item => String(item._id)}
+      />
+
+
+
+      {/*<View style={{}}>
         <Text style={{color: 'blue', fontSize: 30}}>Hello World!</Text>
       </View>
       <View>
@@ -40,52 +53,8 @@ const App: () => React$Node = () => {
           title="Try me"
           color="#841584"
         />
-      </View>
-    </View>
-    {/*<>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-      </>*/}
-    < / >
+      </View>*/}
+    </SafeAreaView>
   );
 };
 
@@ -127,5 +96,72 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
 });
+
+const tempData = [
+  {
+    _id: 1,
+    price: '400€',
+    address: 'my house',
+    host: 'bryan stark',
+    date: 'from march',
+    img_id: 'IMG_6514.jpg'
+  },
+  {
+    _id: 2,
+    price: '500€',
+    address: 'my house',
+    host: 'bryan stark',
+    date: 'from march',
+    img_id: 'IMG_6514.jpg'
+  },
+  {
+    _id: 3,
+    price: '600€',
+    address: 'my house',
+    host: 'bryan stark',
+    date: 'from march',
+    img_id: 'IMG_6514.jpg'
+  },
+  {
+    _id: 4,
+    price: '700€',
+    address: 'my house',
+    host: 'bryan stark',
+    date: 'from march',
+    img_id: 'IMG_6514.jpg'
+  },
+  {
+    _id: 5,
+    price: '800€',
+    address: 'my house',
+    host: 'bryan stark',
+    date: 'from march',
+    img_id: 'IMG_6514.jpg'
+  },
+  {
+    _id: 6,
+    price: '900€',
+    address: 'my house',
+    host: 'bryan stark',
+    date: 'from march',
+    img_id: 'IMG_6514.jpg'
+  },
+  {
+    _id: 7,
+    price: '1000€',
+    address: 'my house',
+    host: 'bryan stark',
+    date: 'from march',
+    img_id: 'IMG_6514.jpg'
+  },
+  {
+    _id: 8,
+    price: '1100€',
+    address: 'my house',
+    host: 'bryan stark',
+    date: 'from march',
+    img_id: 'IMG_6514.jpg'
+  }
+];
 
 export default App;
