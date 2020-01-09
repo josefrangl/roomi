@@ -64,8 +64,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: 10,
-    marginBottom: 20,
-    height: 300,
+    marginTop: 5,
+    marginBottom: 15,
+    height: 290,
     borderColor: '#e8e9eb',
     shadowColor: '#000',
     shadowOffset: {

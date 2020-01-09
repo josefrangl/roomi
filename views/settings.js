@@ -11,12 +11,10 @@ import {
   StatusBar,
 } from 'react-native';
 
-export default function Profile () {
-  // here goes listing card component
+export default function Settings () {
   return (
     <View>
-
-      <Text>Hello world, this is my profile!</Text>
+      <Text>Hello world, this is my settings!</Text>
     </View>
   )
 }

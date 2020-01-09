@@ -20,7 +20,6 @@ export default function Home ({navigation}) {
 
   return (
     <View style={{flex: 1}}>
-      
       <FlatList
         data={tempData}
         renderItem={({item}) => (
@@ -29,10 +28,6 @@ export default function Home ({navigation}) {
             item={item}
           />)}
         keyExtractor={item => String(item._id)}
-      />
-      <Button 
-        title='See my profile'
-        onPress={() => navigation.navigate('Profile')}
       />
     </View>
   );

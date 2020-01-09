@@ -1,13 +1,9 @@
 import React from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
   FlatList,
-  ScrollView,
   View,
   Text,
-  Button,
-  StatusBar,
   Image,
   TouchableOpacity
 } from 'react-native';
@@ -30,10 +26,6 @@ export default function Home ({navigation}) {
           />)}
         keyExtractor={item => String(item._id)}
       />
-      <Button 
-        title='See my profile'
-        onPress={() => navigation.navigate('Profile')}
-      />
     </View>
   );
 }
@@ -43,22 +35,22 @@ export default function Home ({navigation}) {
 const height = '100%';
 const width = '100%';
 
-Home.navigationOptions = {
+Home.navigationOptions = props => ({
   title: 'roomi',
   headerTitleStyle: {
     fontSize: 32,
   },
-   headerRight: () => (
-      <TouchableOpacity
-        onPress={()=> alert('test')}
-      >
-        <Image 
-          source={addImage}
-          style={{ height: 22, width: 22, marginRight: 17 }}
-        />
-      </TouchableOpacity>
-    ),
-}
+  headerRight: () => (
+    <TouchableOpacity
+      onPress={()=> props.navigation.navigate('AddListing')}
+    >
+      <Image 
+        source={addImage}
+        style={{ height: 22, width: 22, marginRight: 17 }}
+      />
+    </TouchableOpacity>
+  ),
+});
 
 
 const tempData = [

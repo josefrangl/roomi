@@ -67,6 +67,12 @@ export default function ListingPage ({navigation}) {
   );
 }
 
+ListingPage.navigationOptions = props => ({
+  title: 'roomi',
+  headerTitleStyle: {
+    fontSize: 32,
+  },
+});
 
 const styles = StyleSheet.create({
   container: {
