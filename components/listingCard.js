@@ -13,7 +13,7 @@ import {
 
 export default function ListingCard ({navigation, _id, item}) {
   
-  const img_path = '../assets/IMG_6514.jpg';
+  const img_path = '../assets/IMG_6514.png';
 
   return (
     <TouchableOpacity 
