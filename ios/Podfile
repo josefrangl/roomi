@@ -34,6 +34,9 @@ target 'roomi' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
+  # Added manually for react-native-vector-icons -jf
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'roomiTests' do
     inherit! :search_paths
     # Pods for testing

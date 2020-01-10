@@ -8,11 +8,13 @@
 
 import React from 'react';
 import { View, Text } from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator} from 'react-navigation-tabs';
+
 
 
 import Home from './views/home';
@@ -105,16 +107,49 @@ const settingsStack = createStackNavigator({
 );
 
 const AppNavigatorTab = createBottomTabNavigator({
-  Home: rootHomeStack,
-  Profile: profileStack,
-  Settings: settingsStack,
+  Home: {
+    screen: rootHomeStack,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor, activeTintColor }) => (
+        <Icon 
+          name='home'
+          size={35} 
+          color={tintColor}
+          style={{ width: 35, height: 35, textAlignVertical: 'bottom'}} />
+      ),
+    }
+  },
+  Profile: {
+    screen: profileStack,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor, activeTintColor }) => (
+        <Icon 
+          name='user'
+          size={35} 
+          color={tintColor}
+          style={{ width: 35, height: 35, textAlignVertical: 'bottom'}} />
+      ),
+    }
+  }, 
+  Settings: {
+    screen: settingsStack,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor, activeTintColor }) => (
+        <Icon 
+          name='setting'
+          size={35} 
+          color={tintColor}
+          style={{ width: 35, height: 35, textAlignVertical: 'bottom'}} />
+      ),
+    }
+  } 
 },
 {
   initialRouteName: 'Home',
-  defaultNavigationOptions: ({navigation}) => ({
-  }),
   tabBarOptions: {
     activeTintColor: 'black',
+    showLabel: false,
+    showIcon: true,
     labelStyle: {
       fontSize: 20,
     },

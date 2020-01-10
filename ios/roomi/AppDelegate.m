@@ -31,9 +31,21 @@
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
+
 {
+
+NSURL *jsCodeLocation;
 #if DEBUG
   return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+
+  #if TARGET_IPHONE_SIMULATOR
+    // Run from locally running dev server
+    jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle"];
+  #else
+    // Run on device with code coming from dev server on PC (change the IP to your PCs IP)
+    jsCodeLocation = [NSURL URLWithString:@"http://192.168.1.245:8081/index.ios.bundle"];
+  #endif
+
 #else
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
