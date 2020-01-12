@@ -17,7 +17,7 @@ export default function ListingPage ({navigation}) {
   
   const win = Dimensions.get('window');
   const height = '100%';
-  const img_path = '../assets/IMG_6514.jpg';
+  const img_path = '../assets/IMG_6514.png';
 
   return(
     <View style={{}}>

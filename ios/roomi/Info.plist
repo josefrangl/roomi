@@ -51,6 +51,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+  <!-- Added by moi -->
   <key>UIAppFonts</key>
   <array>
     <string>AntDesign.ttf</string>
@@ -69,5 +70,16 @@
     <string>Octicons.ttf</string>
     <string>Zocial.ttf</string>
   </array>
+  <!-- Required with iOS 10 and higher -->
+  <key>NSCameraUsageDescription</key>
+  <string>Your message to user when the camera is accessed for the first time</string>
+
+  <!-- Required with iOS 11 and higher: include this only if you are planning to use the camera roll -->
+  <key>NSPhotoLibraryAddUsageDescription</key>
+  <string>Your message to user when the photo library is accessed for the first time</string>
+
+  <!-- Include this only if you are planning to use the camera roll -->
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>Your message to user when the photo library is accessed for the first time</string>
 </dict>
 </plist>

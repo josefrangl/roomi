@@ -8,21 +8,19 @@
 
 import React from 'react';
 
-// Navigation
-// import { createAppContainer } from 'react-navigation';
-// import AppNavigator from './navigation/appNavigation';
+import { Provider } from 'react-redux';
+import store from './store/store';
+
 
 import RootNavigator from './navigation/rootNavigation';
-
-// const AppContainer = createAppContainer(AppNavigator);
 
 
 const App: () => React$Node = () => {
   return (
-    <RootNavigator />
+    <Provider store={store}>
+      <RootNavigator />
+    </Provider>
   );
 };
 
 export default App;
-
-{/*<AppContainer style={{ backgroundColor: 'white' }}/>*/}

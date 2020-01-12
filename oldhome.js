@@ -16,8 +16,11 @@ import ListingCard from './components/listingCard';
 
 const addImage = require('./assets/add_png.png');
 
+const API_URL = 'https://roomi-end.herokuapp.com';
+
 export default function Home ({navigation}) {
 
+  
   return (
     <View style={{flex: 1}}>
       <FlatList

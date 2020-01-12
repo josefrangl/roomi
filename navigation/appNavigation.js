@@ -21,6 +21,7 @@ const myDefaultStackOptions = {
   },
   cardStyle: {
     backgroundColor: 'white',
+    opacity: 1,
   },
   headerStatusBarHeight: 35,
   headerTintColor: 'black',
@@ -137,7 +138,7 @@ const AppNavigator = createBottomTabNavigator({
     labelStyle: {
       fontSize: 20,
     },
-    style: {
+    cardStyle: {
 
       backgroundColor: 'white',
     },

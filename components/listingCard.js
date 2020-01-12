@@ -7,7 +7,7 @@ import {
   Image,
   Button,
   TouchableOpacity,
-} from 'react-native'
+} from 'react-native';
 
 
 
@@ -33,6 +33,7 @@ export default function ListingCard ({navigation, _id, item}) {
           />
         </View>
         <View style={styles.box}>
+
           <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
             <Text style={styles.defaultText}>{item.price}</Text>
             <Text style={styles.defaultText}>{item.roommates} RM</Text>
@@ -46,6 +47,7 @@ export default function ListingCard ({navigation, _id, item}) {
               <Button title={`call: ${item.host}`} onPress={()=> alert('Calling host')} />
             </View>
           </View>
+
         </View>
       </View>
     </TouchableOpacity>
@@ -64,8 +66,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: 10,
-    marginTop: 5,
-    marginBottom: 15,
+    marginTop: 8,
+    marginBottom: 10,
     height: 290,
     borderColor: '#e8e9eb',
     shadowColor: '#000',
@@ -78,8 +80,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   image: {
-    borderTopRightRadius: 7,
-    borderTopLeftRadius: 7,
+    borderTopRightRadius: 8,
+    borderTopLeftRadius: 8,
     overflow: 'hidden',
     flex: 4.5,
     height,
@@ -87,8 +89,8 @@ const styles = StyleSheet.create({
 
   },
   box: {
-    borderBottomRightRadius: 7,
-    borderBottomLeftRadius: 7,
+    borderBottomRightRadius: 8,
+    borderBottomLeftRadius: 8,
     flex: 3.5,
     width,
     backgroundColor: 'white',
@@ -103,4 +105,5 @@ const styles = StyleSheet.create({
     fontFamily: 'System'
   }
 
-})
+});
+

@@ -7,7 +7,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 // goes here.
 
 import AppNavigator from './appNavigation';
-// import AuthNavigator from './authNavigation';
+import AuthNavigator from './authNavigation';
 
 import AuthLoadingScreen from '../views/authLoading';
 
@@ -19,7 +19,7 @@ export default createAppContainer(
     {
       AuthLoading: AuthLoadingScreen,
       App: AppNavigator,
-      /*Auth: AuthNavigator,*/
+      Auth: AuthNavigator,
     },
     {
       initialRouteName: 'AuthLoading',
