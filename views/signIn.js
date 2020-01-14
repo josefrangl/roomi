@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import {
+  Alert,
   View,
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -13,6 +14,8 @@ import {
   ScrollView,
   KeyboardAvoidingView
 } from 'react-native';
+
+import { loginUser } from '../utils/apiClientService';
 
 import * as Yup from 'yup';
 
@@ -30,6 +33,30 @@ export default SignIn = ({ navigation }) => {
       .min(8, 'Password should be at least 8 characters long')
       .required('Required'),
   })
+
+  const handleLogin = () => {
+    singInValidationSchema.validate(login)
+      .then(value => {
+        // check if correct ->
+        setLogin(defaultLogin); 
+        loginUser(login)
+          .then(res => {
+            if (res.status === 202) {
+              // SAVE IN STATE!!!!!!
+              console.log(res.data);
+              navigation.navigate('App');
+            } else {
+              console.log('unknownn logic error');
+            }
+          }).catch(err => {
+            if(err.response) {
+              Alert.alert('Error', String(err.response.data));
+            }
+          });
+      }).catch(err => {
+      Alert.alert('Input error', String(err.errors));
+    });
+  };
 
   /*style={styles.parentContainer}*/
 
@@ -63,18 +90,7 @@ export default SignIn = ({ navigation }) => {
                 />
                 <TouchableOpacity 
                   style={styles.submit}
-                  onPress={async () => {
-                    singInValidationSchema.validate(login).then(value => {
-                        // check if correct ->
-                        const correct = true;
-                        console.log(value);
-                        setLogin(defaultLogin);  
-                        if (correct) navigation.navigate('App');
-                        
-                    }).catch(err => {
-                      alert(err.errors);
-                    });
-                  }} 
+                  onPress={() => handleLogin()} 
                 >
                   <View>
                     <Text style={styles.textSubmit}>SUBMIT</Text>
@@ -84,7 +100,7 @@ export default SignIn = ({ navigation }) => {
             <View style={{marginVertical: 20}}>
               <Button 
                 title='Sign Up!'
-                onPress={()=> alert('Signining up!')}
+                onPress={()=> navigation.navigate('SignUp')}
               />
             </View> 
           </View>

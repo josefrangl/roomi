@@ -3,6 +3,7 @@ import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import SignIn from '../views/signIn';
+import SignUp from '../views/signUp';
 
 
 
@@ -19,7 +20,9 @@ const myDefaultStackOptions = {
 
 const AuthNavigator = createStackNavigator(
   {
-    'SignIn': SignIn
+    'SignIn': SignIn,
+    'SignUp': SignUp
+
   },
   {
     initialRouteName: 'SignIn',

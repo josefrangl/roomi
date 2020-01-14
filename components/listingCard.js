@@ -9,6 +9,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import Icon from 'react-native-vector-icons/AntDesign';
+
 
 
 export default function ListingCard ({navigation, _id, item}) {
@@ -34,17 +36,35 @@ export default function ListingCard ({navigation, _id, item}) {
         </View>
         <View style={styles.box}>
 
-          <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
-            <Text style={styles.defaultText}>{item.price}</Text>
-            <Text style={styles.defaultText}>{item.roommates} RM</Text>
-            <Text style={styles.defaultText}>Your friend: {item.host} is renting this room.</Text>
+          <View style={{flexDirection: 'row', flexWrap: 'wrap', paddingHorizontal: 6}}>
+            <Text style={[styles.defaultText],{fontSize: 40, fontWeight: '600', color: '#434343'}}>{item.price}</Text>
+            {/*<Text style={styles.defaultText}>{item.roommates} RM</Text>*/}
+            <Text style={styles.defaultText}>Hosted by: {item.host}</Text>
           </View>
           <View>
-            <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
-              <Text style={styles.defaultText}>Address: {item.address}</Text>  
-              <Text style={styles.defaultText}>{item.date_from}</Text>
-              <Text style={styles.defaultText}>{item.date_until ? item.date_until : ''}</Text>
-              <Button title={`call: ${item.host}`} onPress={()=> alert('Calling host')} />
+            <View style={{flexDirection: 'column', flexWrap: 'wrap', paddingHorizontal: 7}}>
+              
+              <View style={{flexDirection: 'row'}}>
+                <Icon 
+                  name='enviromento'
+                  size={18} 
+                  color={'black'}
+                  style={{ paddingTop: 2, width: 22, height: 24, textAlignVertical: 'center'}}
+                />
+                <Text style={styles.defaultText}>{item.address}</Text>  
+              </View>
+
+              <View style={{flexDirection: 'row'}}>
+                <Icon 
+                  name='calendar'
+                  size={18} 
+                  color={'black'}
+                  style={{ paddingTop: 2, width: 22, height: 24, textAlignVertical: 'center'}}
+                />
+                <Text style={styles.defaultText}>{item.date_from}</Text>
+                <Text style={styles.defaultText}>{item.date_until ? `- ${item.date_until}` : ''}</Text>
+                {/*<Button title={`call: ${item.host}`} onPress={()=> alert('Calling host')} />*/}
+              </View>
             </View>
           </View>
 

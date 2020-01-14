@@ -6,4 +6,8 @@ const fetchListings = () => axios.get(API_URL+'/test');
 
 const addListingToServer = (listing) => axios.post(API_URL+'/add', listing);
 
-module.exports = { fetchListings, addListingToServer }
+const createUser = (login) => axios.post(API_URL+'/add_user', login);
+
+const loginUser = (login) => axios.post(API_URL+'/login', login);
+
+module.exports = { fetchListings, addListingToServer, createUser, loginUser };
