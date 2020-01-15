@@ -23,7 +23,7 @@ const addImage = require('../assets/add_png.png');
 const API_URL = 'https://roomi-end.herokuapp.com';
 
 
-function Home ({ navigation, listings, updateListingsState }) {
+Home = ({ navigation, listings, updateListingsState }) => {
 
   getListings = async () => {
     

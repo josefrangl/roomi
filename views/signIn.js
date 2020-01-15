@@ -19,7 +19,12 @@ import { loginUser } from '../utils/apiClientService';
 
 import * as Yup from 'yup';
 
-export default SignIn = ({ navigation }) => {
+// REDUX
+import { connect } from 'react-redux';
+import { setAuthState } from '../store/actions/actions';
+
+
+SignIn = ({ navigation, userAuthInfo, setAuthState }) => {
  
   const defaultLogin = {email: '', password: ''};
 
@@ -37,13 +42,11 @@ export default SignIn = ({ navigation }) => {
   const handleLogin = () => {
     singInValidationSchema.validate(login)
       .then(value => {
-        // check if correct ->
-        setLogin(defaultLogin); 
         loginUser(login)
           .then(res => {
             if (res.status === 202) {
-              // SAVE IN STATE!!!!!!
               console.log(res.data);
+              setAuthState(res.data);
               navigation.navigate('App');
             } else {
               console.log('unknownn logic error');
@@ -51,6 +54,7 @@ export default SignIn = ({ navigation }) => {
           }).catch(err => {
             if(err.response) {
               Alert.alert('Error', String(err.response.data));
+              setLogin({...login, password: ''}); 
             }
           });
       }).catch(err => {
@@ -58,7 +62,6 @@ export default SignIn = ({ navigation }) => {
     });
   };
 
-  /*style={styles.parentContainer}*/
 
   return (
     <KeyboardAvoidingView
@@ -163,3 +166,19 @@ const styles = StyleSheet.create({
     fontSize: 24
   }
 })
+
+const mapStateToProps = (state) => ({
+  userAuthInfo: state.userAuthInfo,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setAuthState: (info) => dispatch(setAuthState(info)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignIn);
+
+
+

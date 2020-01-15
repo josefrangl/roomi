@@ -10,6 +10,8 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  KeyboardAvoidingView,
+  ScrollView,
 } from 'react-native';
 
 import AddListingCard from '../components/addListingCard';
@@ -48,7 +50,12 @@ export default function AddListing ({navigation}) {
   }
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <KeyboardAvoidingView 
+      style={{flex: 1}} 
+      behavior='position'
+      contentContainerStyle={{}}
+    >
+     <ScrollView style={{flex: 1}}>
       <TouchableWithoutFeedback 
         onPress={Keyboard.dismiss}
       >
@@ -123,7 +130,8 @@ export default function AddListing ({navigation}) {
           </View>
         </View>  
       </TouchableWithoutFeedback>
-    </SafeAreaView>
+     </ScrollView>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -140,7 +148,6 @@ const styles = StyleSheet.create({
     height: 540,
     width: 340,
     padding: 20,
-    marginTop: 80,
     alignContent: 'center',
     justifyContent: 'center',
     borderRadius: 8,

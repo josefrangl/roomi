@@ -6,8 +6,9 @@ import { createBottomTabNavigator} from 'react-navigation-tabs';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 import Home from '../views/home';
+import Favorites from '../views/settings';
 import Profile from '../views/profile';
-import Settings from '../views/settings';
+
 
 // HomeStack
 import ListingPage from '../views/listingPage';
@@ -72,6 +73,14 @@ const rootHomeStack = createStackNavigator(
   }
 );
 
+const favoritesStack = createStackNavigator({
+    Favorites: Favorites,
+  },
+  {
+    initialRouteName: 'Favorites',
+    defaultNavigationOptions: myDefaultStackOptions
+  }
+);
 
 const profileStack = createStackNavigator({
     Profile: Profile,
@@ -82,14 +91,7 @@ const profileStack = createStackNavigator({
   }
 );
 
-const settingsStack = createStackNavigator({
-    Settings: Settings,
-  },
-  {
-    initialRouteName: 'Settings',
-    defaultNavigationOptions: myDefaultStackOptions
-  }
-);
+
 
 const AppNavigator = createBottomTabNavigator({
   Home: {
@@ -98,6 +100,18 @@ const AppNavigator = createBottomTabNavigator({
       tabBarIcon: ({ tintColor, activeTintColor }) => (
         <Icon 
           name='home'
+          size={35} 
+          color={tintColor}
+          style={{ width: 35, height: 35, textAlignVertical: 'bottom'}} />
+      ),
+    }
+  },
+  Favorites: {
+    screen: favoritesStack,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor, activeTintColor }) => (
+        <Icon 
+          name='hearto'
           size={35} 
           color={tintColor}
           style={{ width: 35, height: 35, textAlignVertical: 'bottom'}} />
@@ -115,19 +129,7 @@ const AppNavigator = createBottomTabNavigator({
           style={{ width: 35, height: 35, textAlignVertical: 'bottom'}} />
       ),
     }
-  }, 
-  Settings: {
-    screen: settingsStack,
-    navigationOptions: {
-      tabBarIcon: ({ tintColor, activeTintColor }) => (
-        <Icon 
-          name='setting'
-          size={35} 
-          color={tintColor}
-          style={{ width: 35, height: 35, textAlignVertical: 'bottom'}} />
-      ),
-    }
-  } 
+  }
 },
 {
   initialRouteName: 'Home',

@@ -15,16 +15,37 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 
+
+// REDUX
+import { connect } from 'react-redux';
+import { setAuthState } from '../store/actions/actions';
+
+import Icon from 'react-native-vector-icons/AntDesign';
+
+import ImagePicker from 'react-native-image-crop-picker';
+
+
 import * as Yup from 'yup';
 
 import { createUser } from '../utils/apiClientService';
 
+// IMAGE UPLOAD 
+/*import cloudinary from 'cloudinary-core';
+
+const cl = new cloudinary.Cloudinary(
+  {
+    cloud_name: 'roomi', 
+    secure: true
+  });
+
+
+*/
 
 
 // TODO
 // check user does not previously exist
 
-export default SignUp = ({ navigation }) => {
+SignUp = ({ navigation, userAuthInfo, setAuthState }) => {
  
   const defaultLogin = {
     firstName: '',
@@ -33,6 +54,7 @@ export default SignUp = ({ navigation }) => {
     email: '', 
     password: '',
     repeatPassword: '',
+    images: [],
   };
 
   const [ login, setLogin ] = useState(defaultLogin);
@@ -60,8 +82,17 @@ export default SignUp = ({ navigation }) => {
       .then(res => {
         console.log(res);
         if (res.status === 201) {
-          Alert.alert('Account created', 'Now login with your email and password');
-          navigation.navigate('SignIn');
+          // pass id to authinfo
+
+          // upload image if existing:
+          if (login.images) {
+            // upload image
+          } 
+
+          setAuthState(res.data);
+          Alert.alert('Account created', 'One last step!');
+          navigation.navigate('ContactsAdd');
+          setLogin(defaultLogin);
         }
       })
       .catch(e => {
@@ -70,11 +101,14 @@ export default SignUp = ({ navigation }) => {
       });
   } 
 
+  const handleImage = image => {
+    setLogin({...login, images: image});
+  };
   /*style={styles.parentContainer}*/
 
   return (
     <KeyboardAvoidingView
-      behaviour='padding'
+      behaviour='height'
       style={{ flex:1, alignItems: 'center'}}
       keyboardVerticalOffset={800}
     >
@@ -133,11 +167,54 @@ export default SignUp = ({ navigation }) => {
                   onChangeText={(text) => setLogin({ ...login, repeatPassword: text })}
                   value={login.repeatPassword}
                 />
+
+                <Text style={styles.subtitle}>Add a profile pic!</Text>
+                
+                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around'}}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      ImagePicker.openPicker({
+                        width: 400,
+                        heigth: 400,
+                        cropping: true
+                      })
+                      .then(image => handleImage(image))
+                      .catch(e => console.log('error in gallery upload', e));
+                    }}
+                  >
+                    <Icon 
+                      name='picture'
+                      size={38} 
+                      color={'black'}
+                      style={{ paddingTop: 10, width: 38, height: 45, textAlignVertical: 'center'}}
+                    />
+                  </TouchableOpacity>
+                  
+                  <TouchableOpacity
+                    onPress={() => {
+                      ImagePicker.openCamera({
+                        useFrontCamera: true,
+                        height: 300,
+                        width: 300,
+                        cropping: true
+                      }).then(image => handleImage(image))
+                      .catch(e => console.log('error cam', e));
+                    }}
+                  >
+                    <Icon 
+                      name='camerao'
+                      size={38} 
+                      color={'black'}
+                      style={{ paddingTop: 10, width: 38, height: 45, textAlignVertical: 'center'}}
+                    />
+                  </TouchableOpacity>
+                </View>
+                
+
                 <TouchableOpacity 
                   style={styles.submit}
                   onPress={async () => {
-                    singUpValidationSchema.validate(login).then(value => {
-                        setLogin(defaultLogin);  
+                    singUpValidationSchema.validate(login).then(value => { 
                         handleCreateUser(value);
                     }).catch(err => {
                       Alert.alert('Error', String(err.errors));
@@ -168,11 +245,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 100,
+    paddingBottom: 0,
   },
   container: {
     backgroundColor: 'white',
-    height: 500,
+    height: 550,
     width: 340,
     padding: 20,
     alignContent: 'center',
@@ -191,6 +268,12 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     fontSize: 30,
     marginBottom: 10
+  },
+  subtitle: {
+    fontWeight: '600',
+    paddingLeft: 10,
+    fontSize: 18,
+    marginTop: 8
   },
   input: {
     backgroundColor: '#ededed',
@@ -216,4 +299,20 @@ const styles = StyleSheet.create({
     height: 25,
     fontSize: 24
   }
-})
+});
+
+
+
+const mapStateToProps = (state) => ({
+  userAuthInfo: state.userAuthInfo,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setAuthState: (info) => dispatch(setAuthState(info)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignUp);
+

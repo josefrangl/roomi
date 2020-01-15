@@ -10,15 +10,22 @@ import {
   Button,
 } from 'react-native';
 
+// REDUX
+import { connect } from 'react-redux';
+import { setAuthState } from '../store/actions/actions';
 
-export default function Profile () {
+Profile = ({ navigation, userAuthInfo, setAuthState }) => {
   // here goes listing card component
   return (
     <View style={styles.container}>
-      <Text style={{fontSize: 28}}>Hell 22 o world, this is my profile!</Text>
+      {console.log(userAuthInfo)}
+      <Text>{userAuthInfo.firstName}{userAuthInfo.lastName}</Text>
+      <Text>{userAuthInfo.email}</Text>
+      <Text>{userAuthInfo.phone_number}</Text>
+      <Text style={{fontSize: 28}}>Hell 22!!!!!o world, this is my profile!</Text>
     </View>
   )
-}
+};
 
 Profile.navigationOptions = props => ({
   title: 'your rooms',
@@ -38,3 +45,16 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 })
+
+const mapStateToProps = (state) => ({
+  userAuthInfo: state.userAuthInfo,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setAuthState: (info) => dispatch(setAuthState(info)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Profile);

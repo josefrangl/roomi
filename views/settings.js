@@ -11,7 +11,7 @@ import {
   StatusBar,
 } from 'react-native';
 
-export default function Settings () {
+export default function Favorites () {
   return (
     <View style={styles.container}>
       <Text style={{fontSize: 28}}>Hello world, this is my settings!</Text>
@@ -19,8 +19,8 @@ export default function Settings () {
   )
 }
 
-Settings.navigationOptions = props => ({
-  title: 'settings',
+Favorites.navigationOptions = props => ({
+  title: 'favorites',
   headerTitleStyle: {
     fontSize: 28,
   },

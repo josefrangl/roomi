@@ -37,6 +37,9 @@ target 'roomi' do
   # Added manually for react-native-vector-icons -jf
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  # Added manually for react-native-contacts jf
+  pod 'react-native-contacts', :path => '../node_modules/react-native-contacts'
+
   target 'roomiTests' do
     inherit! :search_paths
     # Pods for testing
