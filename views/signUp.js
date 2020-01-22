@@ -24,7 +24,7 @@ import { connect } from 'react-redux';
 import { setAuthState } from '../store/actions/actions';
 // END REDUX
 
-import { createUser, postPhoto } from '../utils/apiClientService';
+import { createUser, checkEmail, postPhoto } from '../utils/apiClientService';
 
 SignUp = ({ navigation, userAuthInfo, setAuthState }) => {
  
@@ -59,15 +59,24 @@ SignUp = ({ navigation, userAuthInfo, setAuthState }) => {
   })
 
   const handleCreateUser = async loginInfo => {
-    if (login.image) {
-      postPhoto(login.image, login).then(res => {
-        const imageUrl = res.data;
-        loginInfo.profile_pic = imageUrl;
+
+    // check if email already exists
+    checkEmail({ email: loginInfo.email }).then(res => {
+      if (login.image) {
+        postPhoto(login.image, login).then(res => {
+          const imageUrl = res.data;
+          loginInfo.profile_pic = imageUrl;
+          createUserLogin(loginInfo);
+        }).catch(e => console.log('error uploading image: ', e));
+      } else {
         createUserLogin(loginInfo);
-      }).catch(e => console.log('error uploading image: ', e));
-    } else {
-      createUserLogin(loginInfo);
-    } 
+      } 
+    }).catch(err => {
+      console.log(String(err.response.data));
+      if (err.response) {
+        Alert.alert('Error', String(err.response.data));
+      }
+    })
   };
 
   const createUserLogin = async loginInfo => {

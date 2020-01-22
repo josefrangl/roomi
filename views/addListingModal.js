@@ -14,13 +14,12 @@ import {
   ScrollView,
 } from 'react-native';
 
-import AddListingCard from '../components/addListingCard';
+import Icon from 'react-native-vector-icons/AntDesign';
+import ImagePicker from 'react-native-image-crop-picker';
 
+import AddListingCard from '../components/addListingCard';
 import { addListingToServer } from '../utils/apiClientService';
 
-import Icon from 'react-native-vector-icons/AntDesign';
-
-import ImagePicker from 'react-native-image-crop-picker';
 
 export default function AddListing ({navigation}) {
   

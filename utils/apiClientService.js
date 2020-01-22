@@ -1,7 +1,7 @@
 import axios from 'axios';
 import FormData from 'form-data';
 
-const API_URL = 'https://roomi-end.herokuapp.com';
+const API_URL = 'http://localhost:3000'; //'https://roomi-end.herokuapp.com';
 
 const fetchListings = () => axios.get(API_URL+'/test');
 
@@ -10,6 +10,8 @@ const addListingToServer = (listing) => axios.post(API_URL+'/add', listing);
 const createUser = (login) => axios.post(API_URL+'/add_user', login);
 
 const loginUser = (login) => axios.post(API_URL+'/login', login);
+
+const checkEmail = (email) => axios.post(API_URL+'/check_email', email);
 
 const postPhoto = (photo) => {
   console.log('triggered', photo);
@@ -29,4 +31,11 @@ const postPhoto = (photo) => {
   });
 }
 
-module.exports = { fetchListings, addListingToServer, createUser, loginUser, postPhoto };
+module.exports = { 
+  fetchListings, 
+  addListingToServer, 
+  createUser, 
+  loginUser,
+  checkEmail, 
+  postPhoto 
+};

@@ -48,10 +48,10 @@ SignIn = ({ navigation, userAuthInfo, setAuthState }) => {
               setAuthState(res.data);
               navigation.navigate('App');
             } else {
-              console.log('unknownn logic error');
+              console.log('unknown logic error');
             }
           }).catch(err => {
-            if(err.response) {
+            if (err.response) {
               Alert.alert('Error', String(err.response.data));
               setLogin({...login, password: ''}); 
             }
