@@ -6,7 +6,7 @@ import { createBottomTabNavigator} from 'react-navigation-tabs';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 import Home from '../views/home';
-import Favorites from '../views/settings';
+import Favorites from '../views/favorites';
 import Profile from '../views/profile';
 
 
@@ -27,11 +27,15 @@ const myDefaultStackOptions = {
   headerStatusBarHeight: 35,
   headerTintColor: 'black',
   headerBackTitle: ' ',
-  /*headerTitleStyle: {
+  /*
+  // In case I want to use a logo
+  headerTitleStyle: {
     marginTop: 0,
     justifyContent: 'center',
   }*/
-  /*headerTitle: () => <LogoTitle />,*/
+  /*
+  headerTitle: () => (<LogoTitle />),
+  */
 }
 
 // In case I want to use a logo

@@ -15,35 +15,16 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 
+import Icon from 'react-native-vector-icons/AntDesign';
+import ImagePicker from 'react-native-image-crop-picker';
+import * as Yup from 'yup';
 
 // REDUX
 import { connect } from 'react-redux';
 import { setAuthState } from '../store/actions/actions';
+// END REDUX
 
-import Icon from 'react-native-vector-icons/AntDesign';
-
-import ImagePicker from 'react-native-image-crop-picker';
-
-
-import * as Yup from 'yup';
-
-import { createUser } from '../utils/apiClientService';
-
-// IMAGE UPLOAD 
-/*import cloudinary from 'cloudinary-core';
-
-const cl = new cloudinary.Cloudinary(
-  {
-    cloud_name: 'roomi', 
-    secure: true
-  });
-
-
-*/
-
-
-// TODO
-// check user does not previously exist
+import { createUser, postPhoto } from '../utils/apiClientService';
 
 SignUp = ({ navigation, userAuthInfo, setAuthState }) => {
  
@@ -54,7 +35,8 @@ SignUp = ({ navigation, userAuthInfo, setAuthState }) => {
     email: '', 
     password: '',
     repeatPassword: '',
-    images: [],
+    image: null,
+    profile_pic: null
   };
 
   const [ login, setLogin ] = useState(defaultLogin);
@@ -76,19 +58,23 @@ SignUp = ({ navigation, userAuthInfo, setAuthState }) => {
       .oneOf([Yup.ref('password'), null], 'Passwords must match!')
   })
 
-  const handleCreateUser = login => {
-    console.log('handle user');
-    createUser(login)
+  const handleCreateUser = async loginInfo => {
+    if (login.image) {
+      postPhoto(login.image, login).then(res => {
+        const imageUrl = res.data;
+        loginInfo.profile_pic = imageUrl;
+        createUserLogin(loginInfo);
+      }).catch(e => console.log('error uploading image: ', e));
+    } else {
+      createUserLogin(loginInfo);
+    } 
+  };
+
+  const createUserLogin = async loginInfo => {
+    createUser(loginInfo)
       .then(res => {
-        console.log(res);
         if (res.status === 201) {
           // pass id to authinfo
-
-          // upload image if existing:
-          if (login.images) {
-            // upload image
-          } 
-
           setAuthState(res.data);
           Alert.alert('Account created', 'One last step!');
           navigation.navigate('ContactsAdd');
@@ -99,12 +85,11 @@ SignUp = ({ navigation, userAuthInfo, setAuthState }) => {
         console.log('error in creating user in Sign Up: ', e);
         Alert.alert('Error', 'There was an error creating your account, try again later!');
       });
-  } 
+  };
 
   const handleImage = image => {
-    setLogin({...login, images: image});
+    setLogin({...login, image: image});
   };
-  /*style={styles.parentContainer}*/
 
   return (
     <KeyboardAvoidingView
@@ -174,9 +159,10 @@ SignUp = ({ navigation, userAuthInfo, setAuthState }) => {
                   <TouchableOpacity
                     onPress={() => {
                       ImagePicker.openPicker({
-                        width: 400,
-                        heigth: 400,
-                        cropping: true
+                        cropping: true,
+                        width: 500,
+                        height: 500,
+                        forceJpg: true
                       })
                       .then(image => handleImage(image))
                       .catch(e => console.log('error in gallery upload', e));
@@ -194,9 +180,10 @@ SignUp = ({ navigation, userAuthInfo, setAuthState }) => {
                     onPress={() => {
                       ImagePicker.openCamera({
                         useFrontCamera: true,
-                        height: 300,
-                        width: 300,
-                        cropping: true
+                        width: 500,
+                        height: 500,
+                        cropping: true,
+                        forceJpg: true
                       }).then(image => handleImage(image))
                       .catch(e => console.log('error cam', e));
                     }}
@@ -226,7 +213,7 @@ SignUp = ({ navigation, userAuthInfo, setAuthState }) => {
                   </View>
                 </TouchableOpacity>
             </View>
-            <View style={{marginVertical: 20}}>
+            <View style={{marginVertical: 10}}>
               <Button 
                 title='Sign In instead!'
                 onPress={()=> navigation.navigate('SignIn')}
@@ -249,7 +236,7 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: 'white',
-    height: 550,
+    height: 565,
     width: 340,
     padding: 20,
     alignContent: 'center',
@@ -270,10 +257,10 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   subtitle: {
-    fontWeight: '600',
+    fontWeight: '500',
     paddingLeft: 10,
-    fontSize: 18,
-    marginTop: 8
+    fontSize: 22,
+    marginTop: 10
   },
   input: {
     backgroundColor: '#ededed',

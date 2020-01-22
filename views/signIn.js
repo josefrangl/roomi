@@ -30,17 +30,16 @@ SignIn = ({ navigation, userAuthInfo, setAuthState }) => {
 
   const [ login, setLogin ] = useState(defaultLogin);
 
-  const singInValidationSchema = Yup.object({
+  const signInValidationSchema = Yup.object({
     email: Yup.string('Invalid Email') 
       .email('Invalid email')             
       .required('Required'),
     password: Yup.string()
-      .min(8, 'Password should be at least 8 characters long')
-      .required('Required'),
+      .required('Password Required'),
   })
 
   const handleLogin = () => {
-    singInValidationSchema.validate(login)
+    signInValidationSchema.validate(login)
       .then(value => {
         loginUser(login)
           .then(res => {

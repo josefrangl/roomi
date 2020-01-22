@@ -18,6 +18,10 @@ import AddListingCard from '../components/addListingCard';
 
 import { addListingToServer } from '../utils/apiClientService';
 
+import Icon from 'react-native-vector-icons/AntDesign';
+
+import ImagePicker from 'react-native-image-crop-picker';
+
 export default function AddListing ({navigation}) {
   
   const defaultFormInput = {
@@ -52,7 +56,7 @@ export default function AddListing ({navigation}) {
   return (
     <KeyboardAvoidingView 
       style={{flex: 1}} 
-      behavior='position'
+      behavior=''
       contentContainerStyle={{}}
     >
      <ScrollView style={{flex: 1}}>
@@ -112,6 +116,46 @@ export default function AddListing ({navigation}) {
 
             <Text style={{fontWeight: '500', paddingLeft: 10, fontSize: 22, marginTop: 10}}>add an image</Text>
 
+            <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around'}}>
+              <TouchableOpacity
+                onPress={() => {
+                  ImagePicker.openPicker({
+                    width: 400,
+                    heigth: 400,
+                    cropping: true
+                  })
+                  .then(image => handleImage(image))
+                  .catch(e => console.log('error in gallery upload', e));
+                }}
+              >
+                <Icon 
+                  name='picture'
+                  size={38} 
+                  color={'black'}
+                  style={{ paddingTop: 10, width: 38, height: 45, textAlignVertical: 'center'}}
+                />
+              </TouchableOpacity>
+              
+              <TouchableOpacity
+                onPress={() => {
+                  ImagePicker.openCamera({
+                    useFrontCamera: true,
+                    height: 300,
+                    width: 300,
+                    cropping: true
+                  }).then(image => handleImage(image))
+                  .catch(e => console.log('error cam', e));
+                }}
+              >
+                <Icon 
+                  name='camerao'
+                  size={38} 
+                  color={'black'}
+                  style={{ paddingTop: 10, width: 38, height: 45, textAlignVertical: 'center'}}
+                />
+              </TouchableOpacity>
+            </View>
+
           </View>
           <View style={styles.buttonContainer}>
             <Button
@@ -124,7 +168,6 @@ export default function AddListing ({navigation}) {
               style={styles.buttonAdd}
               onPress={() => {
                 handleAdd();
-                /*navigation.goBack();*/
               }}
             />
           </View>
@@ -144,6 +187,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   container: {
+    marginTop: 100,
     backgroundColor: 'white',
     height: 540,
     width: 340,
@@ -176,6 +220,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     flex: 1,
+    marginTop: 10,
     justifyContent: 'center',
   },
   buttonCancel: {

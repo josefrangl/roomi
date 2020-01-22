@@ -8,7 +8,6 @@ import {
   Button,
   TouchableOpacity,
 } from 'react-native';
-
 import Icon from 'react-native-vector-icons/AntDesign';
 
 
@@ -31,35 +30,71 @@ export default function ListingCard ({navigation, _id, item}) {
               width
             }}
             resizeMode='center'
-            source={require(img_path)}
+            source={{uri: item.img_id}}
           />
         </View>
         <View style={styles.box}>
 
-          <View style={{flexDirection: 'row', flexWrap: 'wrap', paddingHorizontal: 6}}>
-            <Text style={[styles.defaultText],{fontSize: 40, fontWeight: '600', color: '#434343'}}>{item.price}</Text>
+          <View style={{flexDirection: 'row', flexWrap: 'wrap', paddingHorizontal: 10, paddingTop: 2}}>
+            <Text style={[styles.defaultText],{fontSize: 40, paddingRight: 20, fontWeight: '600', color: '#434343'}}>{item.price}</Text>
             {/*<Text style={styles.defaultText}>{item.roommates} RM</Text>*/}
-            <Text style={styles.defaultText}>Hosted by: {item.host}</Text>
+            <Image 
+              style={{
+                height: 40,
+                width: 40,
+                borderRadius: 40,
+                marginTop: 4,
+                marginHorizontal: 4
+              }}
+              resizeMode='center'
+              source={{uri: item.profile_url}}
+            />
+            {item.connection === 2 ? 
+              <Image
+                style={{
+                  height: 40,
+                  width: 40,
+                  borderRadius: 40,
+                  marginTop: 4,
+                  marginHorizontal: 4,
+                }}
+                resizeMode='center'
+                source={{uri: item.second_profile_url}}
+              />
+            :
+              <Text></Text>
+            }
+            {/*<Text style={styles.defaultText}>Hosted by: {item.host}</Text>*/}
           </View>
           <View>
-            <View style={{flexDirection: 'column', flexWrap: 'wrap', paddingHorizontal: 7}}>
+            <View style={{flexDirection: 'column', flexWrap: 'wrap', paddingHorizontal: 10}}>
               
-              <View style={{flexDirection: 'row'}}>
+              <View style={{flexDirection: 'row', paddingBottom: 6}}>
+                <Icon 
+                  name='user'
+                  size={22} 
+                  color={'black'}
+                  style={{ paddingTop: 2, width: 24, height: 24, textAlignVertical: 'center'}}
+                />
+                <Text style={styles.defaultText}>By {item.host} {item.connection === 2 ? `friend of ${item.second_host}` : ''}</Text>  
+              </View>
+
+              <View style={{flexDirection: 'row', paddingBottom: 6}}>
                 <Icon 
                   name='enviromento'
-                  size={18} 
+                  size={22} 
                   color={'black'}
-                  style={{ paddingTop: 2, width: 22, height: 24, textAlignVertical: 'center'}}
+                  style={{ paddingTop: 2, width: 24, height: 24, textAlignVertical: 'center'}}
                 />
-                <Text style={styles.defaultText}>{item.address}</Text>  
+                <Text style={styles.defaultText}>{item.address}, {item.city}, {item.country}</Text>  
               </View>
 
               <View style={{flexDirection: 'row'}}>
                 <Icon 
                   name='calendar'
-                  size={18} 
+                  size={22} 
                   color={'black'}
-                  style={{ paddingTop: 2, width: 22, height: 24, textAlignVertical: 'center'}}
+                  style={{ paddingTop: 2, width: 24, height: 26, textAlignVertical: 'center'}}
                 />
                 <Text style={styles.defaultText}>{item.date_from}</Text>
                 <Text style={styles.defaultText}>{item.date_until ? `- ${item.date_until}` : ''}</Text>
@@ -88,7 +123,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginTop: 8,
     marginBottom: 10,
-    height: 290,
+    height: 330,
     borderColor: '#e8e9eb',
     shadowColor: '#000',
     shadowOffset: {
@@ -121,8 +156,9 @@ const styles = StyleSheet.create({
   },
   defaultText: {
     marginLeft: 5,
-    fontSize: 18,
-    fontFamily: 'System'
+    fontSize: 16,
+    fontFamily: 'System',
+    paddingTop: 4
   }
 
 });

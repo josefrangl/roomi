@@ -14,10 +14,10 @@ import {
 export default function Favorites () {
   return (
     <View style={styles.container}>
-      <Text style={{fontSize: 28}}>Hello world, this is my settings!</Text>
+      <Text style={{fontSize: 28}}>Your favorites! TBA!</Text>
     </View>
-  )
-}
+  );
+};
 
 Favorites.navigationOptions = props => ({
   title: 'favorites',

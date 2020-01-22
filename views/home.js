@@ -9,14 +9,18 @@ import {
   ActivityIndicator
 } from 'react-native';
 
+import Icon from 'react-native-vector-icons/AntDesign';
+
+// redux
 import { connect } from 'react-redux'; 
 import { updateListingsState } from '../store/actions/actions';
 
+// components
 import ListingCard from '../components/listingCard';
 
+// api service
 import { fetchListings } from '../utils/apiClientService';
 
-const addImage = require('../assets/add_png.png');
 
 
 
@@ -30,7 +34,8 @@ Home = ({ navigation, listings, updateListingsState }) => {
     if(listings.length) return // avoid duplication on reload app
     fetchListings()
       .then(res => {
-        updateListingsState(res.data);
+        setTimeout(() => updateListingsState(res.data), 1200);
+        // updateListingsState(res.data);
       })
       .catch(e => {
         console.log('error in getting listings:', e);
@@ -70,10 +75,15 @@ Home.navigationOptions = props => ({
     fontSize: 32,
   },
   headerRight: () => (
-    <TouchableOpacity onPress={()=> props.navigation.navigate('AddListing')}>
-      <Image 
-        source={addImage}
-        style={{ height: 22, width: 22, marginRight: 17 }}
+    <TouchableOpacity 
+      onPress={()=> props.navigation.navigate('AddListing')}
+      style={{width: '100%', height: '100%'}}
+    >
+      <Icon
+        name='plus'
+        size={30}
+        color={'black'}
+        style={{width: 32, height: 38, paddingTop: 8, marginRight: 10}}
       />
     </TouchableOpacity>
   ),
